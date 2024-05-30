@@ -55,11 +55,9 @@ M_A_1_fun.df <- list(M_A_1.annotation = import_eggnog("/media/duperron/Pierre_Ph
   reduce(left_join,"qseqid") %>% dplyr::mutate(.,sample = sample,.before = 1) %>% dplyr::filter(., dmd_qcov >= 80 | egg_qcov >= 80) %>%
   dplyr::mutate(.,
                 CPM = M_A_1.contigs.counts$count[match(.$contig_info,M_A_1.contigs.counts$transcript)],
-                level_1 = kegg_id$Level_1[match(.$KEGG_ko,kegg_id$Kegg_ko)],level_2 = kegg_id$Level_2[match(.$KEGG_ko,kegg_id$Kegg_ko)],
-                level_3 = kegg_id$Level_3[match(.$KEGG_ko,kegg_id$Kegg_ko)],
                 domain_score = M_A_1.cat$superkingdom[match(.$contig_info,M_A_1.cat$contig)],domain = if_else(domain_score %in% c("no support",NA),kingdom_OG,gsub(':[^:]*$','',domain_score)),
                 phylum_score = M_A_1.cat$phylum[match(.$contig_info,M_A_1.cat$contig)],phylum = if_else(phylum_score %in% c("no support",NA),phylum_OG,gsub(':[^:]*$', '',phylum_score)),
                 class_score = M_A_1.cat$class[match(.$contig_info,M_A_1.cat$contig)],class = if_else(class_score %in% c("no support",NA),class_OG,gsub(':[^:]*$', '',class_score))) %>%
   subset(.,KEGG_ko != "-") %>% group_by(KEGG_ko,sample,domain,phylum,class) %>%
-  summarize(nb_sample_tax =  n(),cov_sample_tax = sum(coverage),CPM = sum(CPM))
+  summarize(CPM = sum(CPM))
 #View(M_A_1_fun.df)
