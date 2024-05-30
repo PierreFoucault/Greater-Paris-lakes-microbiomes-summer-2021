@@ -1,5 +1,5 @@
 # Summer-in-the-Greater-Paris
-This repository present the R and bash code used for the following article:
+This repository present the R and bash code used for the following preprint:
 "A summer in the Greater Paris: trophic status of peri-urban lakes shapes prokaryotic community structure and functional potential"
 
 Foucault et al., 2024 DOI:
